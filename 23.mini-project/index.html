@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mini Project</title>
+  </head>
+  <body>
+    <h1>My Todo List</h1>
+
+    <h3><span id="todo-counter">0</span>/5 Items</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Activity</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="todo-list"></tbody>
+      <tfoot>
+        <tr>
+          <td>
+            <input id="todo-input" type="text" />
+          </td>
+          <td>
+            <button onclick="addItem()">Submit</button>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <script>
+      const todoItems = ["Coding", "Makan", "Mandi"];
+
+      function loadItems() {
+        const tbodySelector = document.getElementById("todo-list");
+        tbodySelector.innerHTML = "";
+
+        todoItems.forEach((item, index) => {
+          const row = document.createElement("tr");
+          const tdActivity = document.createElement("td");
+          const tdButton = document.createElement("td");
+          const doneButton = document.createElement("button");
+
+          tdActivity.innerText = item;
+          doneButton.innerText = "Done";
+
+          doneButton.onclick = function () {
+            const userConfirmation = confirm("Yakin anda mau hapus?");
+
+            if (userConfirmation) {
+              todoItems.splice(index, 1);
+              loadItems();
+            }
+          };
+
+          tdButton.appendChild(doneButton);
+
+          row.appendChild(tdActivity);
+          row.appendChild(tdButton);
+
+          tbodySelector.appendChild(row);
+        });
+
+        const counterSelector = document.getElementById("todo-counter");
+        counterSelector.innerText = todoItems.length;
+      }
+
+      function addItem() {
+        const inputSelector = document.getElementById("todo-input");
+        const inputValue = inputSelector.value;
+
+        if (inputValue.length) {
+          todoItems.push(inputValue);
+          inputSelector.value = "";
+          loadItems();
+        } else {
+          alert("Kamu harus memasukkan sebuah kegiatan");
+        }
+      }
+
+      window.onload = function () {
+        loadItems();
+      };
+    </script>
+  </body>
+</html>

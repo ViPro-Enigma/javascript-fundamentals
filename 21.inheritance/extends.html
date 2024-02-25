@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class User {
+        firstName = "";
+        lastName = "";
+        username = "";
+        age = 0;
+
+        constructor(inputUsername, inputAge, inputFirstName, inputLastName) {
+          this.username = inputUsername;
+          this.age = inputAge;
+          this.firstName = inputFirstName;
+          this.lastName = inputLastName;
+        }
+
+        #getFullName() {
+          return `${this.firstName} ${this.lastName}`;
+        }
+
+        greeting = function () {
+          return `Hello, I'm ${this.#getFullName()}`;
+        };
+
+        introduction() {
+          return `My name is ${this.#getFullName()}, I am ${
+            this.age
+          } years old`;
+        }
+      }
+
+      class Admin extends User {
+        division = "";
+
+        constructor(
+          inputUsername,
+          inputAge,
+          inputFirstName,
+          inputLastName,
+          inputDivision
+        ) {
+          super(inputUsername, inputAge, inputFirstName, inputLastName);
+
+          this.division = inputDivision;
+        }
+
+        greeting = function () {
+          return `Hello, I'm an admin`;
+        };
+
+        checkPermission = function () {
+          return `My division is ${this.division}`;
+        };
+      }
+
+      const admin = new Admin("doraemon", 20, "Seto", "Javascript", "Sales");
+      const user = new User("naruto", 20, "Naruto", "Uzumaki");
+
+      console.log(admin.checkPermission());
+      console.log(user.greeting());
+    </script>
+  </body>
+</html>

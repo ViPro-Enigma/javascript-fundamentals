@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document 123</title>
+  </head>
+  <body>
+    <h1>Hello World!</h1>
+
+    <h1 id="greeting">Goodbye!</h1>
+
+    <input id="input-name" type="text" />
+    <button onclick="submitName()">Submit</button>
+
+    <p id="message">Hello ___</p>
+
+    <ul id="user-list"></ul>
+
+    <button onclick="changeGreeting()">Change greeting</button>
+    <button onclick="loadUsers()">Load data</button>
+
+    <script>
+      const users = ["Doraemon", "Naruto"];
+
+      function submitName() {
+        // 1. Dapetin input user
+        const inputName = document.getElementById("input-name").value;
+
+        // 2. Ganti nama yang ada di HTML
+        const messageSelector = document.getElementById("message");
+        // messageSelector.innerText = `Hello, my name is ${inputName}. I want to be a programmer!`;
+        messageSelector.innerText += inputName;
+      }
+
+      function changeGreeting() {
+        const message = "Halo dunia!";
+        // document.getElementsByTagName("h1")[1].innerText = message;
+
+        document.getElementById("greeting").innerText = message;
+      }
+
+      function loadUsers() {
+        const listSelector = document.getElementById("user-list");
+
+        listSelector.innerHTML = "";
+
+        users.forEach((user) => {
+          const newListItem = document.createElement("li");
+          newListItem.innerText = user;
+
+          listSelector.appendChild(newListItem);
+        });
+      }
+    </script>
+  </body>
+</html>
